@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" routerLink="/">Name</a>
+
+        <div class="collapse navbar-collapse d-flex w-100 justify-content-between" id="navbar">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/">Home</a>
+                <a class="nav-item nav-link" routerLink="/social/perfil">Perfil</a>
+                <a class="nav-item nav-link" routerLink="/profissional/oportunidades">Mural de Oportunidades</a>
+                <a class="nav-item nav-link" routerLink="/dashboard/egresso">Dashboard</a>
+                <a class="nav-item nav-link" routerLink="/social/publicacao">Publicação</a>
+            </div>
+            <div>
+                <a class="nav-item nav-link logout" (click)="logout()">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>

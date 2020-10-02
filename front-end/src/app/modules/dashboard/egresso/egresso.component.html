@@ -1,0 +1,32 @@
+<div class="card shadow-sm rounded">
+    <div class="card-body">
+        <h5 class="card-title">Distribuição de Alunos em gráfico de linha</h5>
+        <ngx-charts-bar-vertical
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="fakeAlunos"
+            [gradient]="gradient"
+            [xAxis]="x"
+            [yAxis]="y"
+            [legend]="mostrarLegenda"
+            [showXAxisLabel]="mostrarXLabel"
+            [showYAxisLabel]="mostrarYLabel"
+            [xAxisLabel]="xLabel"
+            [yAxisLabel]="yLabel"
+            (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+    </div>
+</div>
+    
+<div class="card shadow-sm rounded" style="margin-top:12px;">
+    <div class="card-body">
+        <h5 class="card-title">Distribuição de Alunos em gráfico PIE</h5>
+        <ngx-charts-pie-grid
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="fakeAlunos"
+            (select)="onSelect($event)">
+        </ngx-charts-pie-grid>
+    </div>
+</div>
+

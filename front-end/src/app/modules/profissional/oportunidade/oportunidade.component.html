@@ -1,0 +1,140 @@
+<div class="d-flex w-100 justify-content-between mb-4">
+    <h1>Mural de Oportunidades</h1>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalCadastro"><i class="fas fa-plus-circle mr-1"></i>Cadastrar</button>
+</div>
+
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="cadastroForm">
+  <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cadastre uma Oportunidade</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          
+        </div>
+        <div class="modal-body">
+            
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                          <label for="inputCity">Título</label>
+                          <input type="text" class="form-control" id="titulo" name = "titulo" formControlName="titulo" [ngClass]="{'is-invalid':cadastroForm.get('titulo').errors &&(cadastroForm.get('titulo').dirty ||cadastroForm.get('titulo').touched)}" />
+                          <div class="invalid-feedback"><span
+                            *ngIf="cadastroForm.get('titulo').errors?.required &&(cadastroForm.get('titulo').dirty ||cadastroForm.get('titulo').touched)">
+                            Título é obrigatório
+                        </span>
+                        </div>
+                      </div>
+                        
+                        <div class="form-group col-md-4">
+                          <label for="inputCEP">Categoria</label>
+                          <select id="categoria" name="categoria" class="form-control" formControlName="categoria"
+                          [ngClass]="{
+                            'is-invalid':
+                              cadastroForm.get('categoria').errors &&
+                              (cadastroForm.get('categoria').dirty ||
+                                cadastroForm.get('categoria').touched)
+                          }">
+                          <option *ngFor="let item of tipos">
+                            {{item}}</option>
+                        </select>
+                        <div class="invalid-feedback"><span
+                          *ngIf="cadastroForm.get('categoria').errors?.required &&(cadastroForm.get('categoria').dirty ||cadastroForm.get('categoria').touched)">
+                          Categoria é obrigatória
+                      </span>
+                      </div>
+                        
+                        </div>
+                      </div>
+                      <div class="form-group">
+                    <label>Descrição:</label>
+                    <textarea class="form-control" id="descricao" rows="3" name ="descricao" placeholder="Digite a descrição da oportunidade."formControlName="descricao" [ngClass]="{'is-invalid':cadastroForm.get('descricao').errors &&(cadastroForm.get('descricao').dirty ||cadastroForm.get('descricao').touched)}"></textarea>
+                    <div class="invalid-feedback"><span
+                      *ngIf="cadastroForm.get('descricao').errors?.required &&(cadastroForm.get('descricao').dirty ||cadastroForm.get('descricao').touched)">
+                      Descrição é obrigatório
+                  </span>
+                  </div>
+                  </div>
+                   
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                          <label for="inputCity">Data de Expiração</label>
+                          <input type="date" class="form-control" id="data_expiracao" name ="data_expiracao" formControlName="data_expiracao"  [ngClass]="{'is-invalid':cadastroForm.get('data_expiracao').errors &&(cadastroForm.get('data_expiracao').dirty ||cadastroForm.get('data_expiracao').touched)}">
+                          <div class="invalid-feedback"><span
+                            *ngIf="cadastroForm.get('data_expiracao').errors?.required &&(cadastroForm.get('data_expiracao').dirty ||cadastroForm.get('data_expiracao').touched)">
+                            Data de expiração é obrigatória
+                        </span>
+                        </div>
+                        </div>
+                        
+                        <div class="form-group col-md-5">
+                          <label for="inputCEP">Local</label>
+                          <input type="text" class="form-control" id="local" name ="local"formControlName="local"  [ngClass]="{'is-invalid':cadastroForm.get('local').errors &&(cadastroForm.get('local').dirty ||cadastroForm.get('local').touched)}"/>
+                          <div class="invalid-feedback"><span
+                            *ngIf="cadastroForm.get('local').errors?.required &&(cadastroForm.get('local').dirty ||cadastroForm.get('local').touched)">
+                            Local é obrigatório
+                        </span>
+                        </div>
+                        </div>
+                      </div>
+                </div>
+                
+            
+        </div>
+        <div class="modal-footer">
+          
+          <button type="submit" class="btn btn-success"[disabled]="!cadastroForm.valid">Cadastrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="card">
+  <div class="card-header">
+      <div class="form-inline my-2 my-lg-0">
+          <input  class="card-header" class="form-control mr-sm-2 col-md-8"  type="search" placeholder="Pesquisar" aria-label="Pesquisar"> 
+          <button type="button" class="btn btn-light mr-1"><i class="fas fa-search"></i></button>
+          <button type="button" class="btn btn-light"><i class="fas fa-filter"></i></button>
+      </div>
+  </div>
+  <div class="card-body" >
+      <ul class="list-group mb-3" *ngFor="let oportunidde of oportunidades">
+          <a type="button"  data-toggle="modal" data-target="#exampleModal" (click)="obterOportunidade(oportunidde.id)">
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div >
+                  <h6 class="my-0" >{{oportunidde.titulo}}</h6>
+                  <small class="text-muted alert-primary rounded-bottom p-1">{{oportunidde.categoria}}</small>
+              </div>
+              </li>
+          </a>
+        </ul> 
+  </div>
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{oportunidade.titulo}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body  m-0">
+        <p><b>Local:</b> {{oportunidade.local}}</p>
+        <p><b>Data de Expiração:</b> {{oportunidade.data_expiracao | date}}, às {{oportunidade.data_expiracao | date: "h:mm a"}}</p>
+        <p><b>Tipo:</b> {{oportunidade.categoria}}</p>
+        <hr>
+        <b>Descrição:</b>
+        <p >{{oportunidade.descricao}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+

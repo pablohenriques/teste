@@ -1,0 +1,32 @@
+<div class="card mb-3 rounded-0">
+    <div>
+        <div class="card bg-light mb-3 rounded-0 border-0">
+            <div class="card-body row">
+                <div class="col-md-2">
+                    <div class="image-container">
+                        <img [src]="url ? url : 'assets/img/blank-profile-picture-973460_1280.png'" class=""> <br />
+                        <!-- <input type='file' class="select-profile-picture" (change)="onSelectFile($event)"> -->
+                        <!-- <span class="message">Toque para selecionar a sua foto</span> -->
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-sm btn-primary float-right" [routerLink]="['editar/', perfil.id]"><i
+                        class="fa fa-pencil-alt mr-2"></i>Editar</button>
+                    <div class="col-md-12">
+                        <h6 class="card-nome-sobrenome">{{perfil.nome}} {{perfil.sobrenome}}</h6>
+                    </div>
+                    <div class="col-md-12 text-muted font-weight-light">
+                        <p>{{perfil.sobre}}</p>
+                    </div>
+                    <div class="col-md-12" *ngIf="perfil.pais && perfil.uf && perfil.cidade">
+                        {{perfil.cidade}}, {{perfil.uf}}, {{perfil.pais}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        ...
+    </div>
+
+</div>

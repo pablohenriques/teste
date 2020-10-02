@@ -1,0 +1,130 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="cadastroForm">
+    <div class="d-flex w-100 justify-content-between">
+        <h6>{{alterar ? 'Editar Perfil' : 'Cadastrar Perfil'}}</h6>
+        <button class="btn btn-sm btn-outline-success" [disabled]="loading || cadastroForm.invalid">
+            <div [ngSwitch]="loading">
+                <div *ngSwitchCase="true">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;
+                    <span>Carregando ...</span>
+                </div>
+                <div *ngSwitchDefault>
+                    <i class="fa fa-check mr-1" aria-hidden="true"></i><span>Salvar</span>
+                </div>
+            </div>
+        </button>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-6">
+            <div class="form-group">
+                <label for="nome">Nome<span class="text-danger"> *</span></label>
+                <input type="text" id="nome" name="nome" class="form-control form-control-sm" placeholder="Nome"
+                    formControlName="nome"
+                    [ngClass]="{'is-invalid':cadastroForm.get('nome').errors &&(cadastroForm.get('nome').dirty ||cadastroForm.get('nome').touched)}" />
+                <div class="invalid-feedback">
+                    <span
+                        *ngIf="cadastroForm.get('nome').errors?.required &&(cadastroForm.get('nome').dirty ||cadastroForm.get('nome').touched)">
+                        Título é obrigatório
+                    </span>
+                    <span
+                        *ngIf="cadastroForm.get('nome').errors?.maxlength &&(cadastroForm.get('nome').dirty ||cadastroForm.get('nome').touched)">
+                        Nome deve ter no máximo 100 caracteres
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-6">
+            <div class="form-group">
+                <label for="sobrenome">Sobrenome<span class="text-danger"> *</span></label>
+                <input type="text" id="sobrenome" name="sobrenome" class="form-control form-control-sm"
+                    placeholder="Sobrenome" formControlName="sobrenome"
+                    [ngClass]="{'is-invalid':cadastroForm.get('sobrenome').errors &&(cadastroForm.get('sobrenome').dirty ||cadastroForm.get('sobrenome').touched)}" />
+                <div class="invalid-feedback">
+                    <span
+                        *ngIf="cadastroForm.get('sobrenome').errors?.required &&(cadastroForm.get('sobrenome').dirty ||cadastroForm.get('sobrenome').touched)">
+                        Sobrenome é obrigatório
+                    </span>
+                    <span
+                        *ngIf="cadastroForm.get('sobrenome').errors?.maxlength &&(cadastroForm.get('sobrenome').dirty ||cadastroForm.get('sobrenome').touched)">
+                        Sobrenome deve ter no máximo 100 caracteres
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-5 col-lg-3 col-xl-2">
+            <div class="form-group">
+                <label class="custom-select-label">Sexo</label>
+                <select id="sexo" name="sexo" class="form-control form-control-sm" formControlName="sexo">
+                    <option *ngFor="let item of listaSexo" [ngValue]="item.sexo">
+                        {{ item.descricao }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-4">
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="text" id="telefone" name="telefone" class="form-control form-control-sm"
+                    placeholder="Telefone" formControlName="telefone"
+                    [ngClass]="{'is-invalid':cadastroForm.get('telefone').errors &&(cadastroForm.get('telefone').dirty ||cadastroForm.get('telefone').touched)}" />
+                <div class="invalid-feedback">
+                    <span
+                        *ngIf="cadastroForm.get('telefone').errors?.maxlength &&(cadastroForm.get('telefone').dirty ||cadastroForm.get('telefone').touched)">
+                        Telefone deve ter no máximo 15 caracteres
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-2">
+            <div class="form-group">
+                <label for="pais">País</label>
+                <input type="text" id="pais" name="pais" class="form-control form-control-sm" placeholder="País"
+                    formControlName="pais"
+                    [ngClass]="{'is-invalid':cadastroForm.get('pais').errors &&(cadastroForm.get('pais').dirty ||cadastroForm.get('pais').touched)}" />
+                <div class="invalid-feedback">
+                    <span
+                        *ngIf="cadastroForm.get('pais').errors?.maxlength &&(cadastroForm.get('pais').dirty ||cadastroForm.get('pais').touched)">
+                        País deve ter no máximo 64 caracteres
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-2">
+            <div class="form-group">
+                <label for="uf">UF</label>
+                <input type="text" id="uf" name="uf" class="form-control form-control-sm" placeholder="UF"
+                    formControlName="uf"
+                    [ngClass]="{'is-invalid':cadastroForm.get('uf').errors &&(cadastroForm.get('uf').dirty ||cadastroForm.get('uf').touched)}" />
+                <div class="invalid-feedback">
+                    <span
+                        *ngIf="cadastroForm.get('uf').errors?.maxlength &&(cadastroForm.get('uf').dirty ||cadastroForm.get('uf').touched)">
+                        UF deve ter no máximo 2 caracteres
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-2">
+            <div class="form-group">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" name="cidade" class="form-control form-control-sm" placeholder="Cidade"
+                    formControlName="cidade"
+                    [ngClass]="{'is-invalid':cadastroForm.get('cidade').errors &&(cadastroForm.get('cidade').dirty ||cadastroForm.get('cidade').touched)}" />
+                <div class="invalid-feedback">
+                    <span
+                        *ngIf="cadastroForm.get('cidade').errors?.maxlength &&(cadastroForm.get('cidade').dirty ||cadastroForm.get('cidade').touched)">
+                        Cidade deve ter no máximo 64 caracteres
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-12">
+            <div class="form-group">
+                <label for="sobre">Sobre</label>
+                <textarea name="sobre" id="sobre" cols="12" rows="4" class="form-control form-control-sm"
+                    formControlName="sobre"
+                    [ngClass]="{'is-invalid':cadastroForm.get('sobre').errors &&(cadastroForm.get('sobre').dirty ||cadastroForm.get('sobre').touched)}"></textarea>
+                <div class="invalid-feedback">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
